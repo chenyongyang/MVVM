@@ -8,8 +8,10 @@
 </head>
 <body>
     <div id="app">
-        <div>{{text}}</div>
-        <div>{{name}}</div>
+        <h2>{{text}}</h2>
+        <input v-model="name">
+        <h1>{{name}}</h1>
+        <button v-on:click="handleClick">click me!</button>
     </div>
     <script src="./Observer.js"></script>
     <script src="./Watcher.js"></script>
@@ -21,14 +23,18 @@
             data: {
                 text: 'text',
                 name: 'name'
+            },
+            methods: {
+                handleClick: function () {
+                    this.text = 'new text';
+                }
+            },
+            mounted: function () {
+                window.setTimeout(() => {
+                    this.text = 'new text----';
+                }, 1000);
             }
         });
-        window.setTimeout(function(){
-            myVue.text = 'new text'
-        }, 2000);
-        window.setTimeout(function () {
-            myVue.name = 'new name'
-        }, 2000)
     </script>
 </body>
 </html>

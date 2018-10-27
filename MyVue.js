@@ -1,7 +1,7 @@
 function MyVue(options){
     let self = this;
-    this.vm = this;
     this.data = options.data;
+    this.methods = options.methods;
 
     Object.keys(this.data).forEach(key => {
         self.proxyKey(key)
@@ -12,7 +12,8 @@ function MyVue(options){
     // new Watcher(this, exp, value => {
     //     el.innerHTML = value
     // });
-    new Compile(options.el, this.vm);
+    new Compile(options.el, this);
+    options.mounted.call(this);
     return this;
 }
 
