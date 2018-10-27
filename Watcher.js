@@ -21,7 +21,7 @@ Watcher.prototype = {
     get(){
         Dep.target = this;
         let value = this.vm.data[this.exp];
-        Dep.target = null;
+        Dep.target = null; // 只需要在Watcher初始化时才需要添加，因此设置全局target属性来存储正在初始化的那个订阅者
         return value;
     }
 }

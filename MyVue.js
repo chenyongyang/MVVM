@@ -1,16 +1,18 @@
-function MyVue(data, el, exp){
+function MyVue(options){
     let self = this;
-    this.data = data;
+    this.vm = this;
+    this.data = options.data;
 
-    Object.keys(data).forEach(key => {
+    Object.keys(this.data).forEach(key => {
         self.proxyKey(key)
     })
 
-    observe(data);
-    el.innerHTML = this.data[exp]; // 初始化模板数据
-    new Watcher(this, exp, value => {
-        el.innerHTML = value
-    });
+    observe(this.data);
+    // el.innerHTML = this.data[exp]; // 初始化模板数据
+    // new Watcher(this, exp, value => {
+    //     el.innerHTML = value
+    // });
+    new Compile(options.el, this.vm);
     return this;
 }
 

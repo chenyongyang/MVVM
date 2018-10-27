@@ -8,19 +8,26 @@
 </head>
 <body>
     <div id="app">
-        {{ text }}
+        <div>{{text}}</div>
+        <div>{{name}}</div>
     </div>
     <script src="./Observer.js"></script>
     <script src="./Watcher.js"></script>
+    <script src="./Compile.js"></script>
     <script src="./MyVue.js"></script>
     <script>
-        let el = document.getElementById('app');
         let myVue = new MyVue({
-            text: 'hello world'
-        },el, 'text');
+            el: '#app',
+            data: {
+                text: 'text',
+                name: 'name'
+            }
+        });
         window.setTimeout(function(){
-            console.log('数据要改变了')
-            myVue.data.text = '这是新数据'
+            myVue.text = 'new text'
+        }, 2000);
+        window.setTimeout(function () {
+            myVue.name = 'new name'
         }, 2000)
     </script>
 </body>
